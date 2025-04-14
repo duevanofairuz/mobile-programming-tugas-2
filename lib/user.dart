@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 part 'user.g.dart';   // digenerate otomatis ketika jalankan command:
-                      // `flutter pub run build_runner build`
+                      // `dart run build_runner build`
 
 @HiveType(typeId: 0)
 class User extends HiveObject{
