@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'user.dart';
 
 void main() async {
 
+  // initialize hivedb
   await Hive.initFlutter();
 
-  var box = await Hive.openBox('boxing');
+  // register adapter agar objek user bisa masuk ke box hivedb
+  Hive.registerAdapter(UserAdapter());
+  // box dengan datatype User
+  var box = await Hive.openBox<User>('boxing');
 
   runApp(const MaterialApp(
     home: Home(),
@@ -21,18 +26,31 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  final _box = Hive.box('boxing');
+  final _box = Hive.box<User>('boxing');
 
   void ngeread(){
-    print(_box.get(1));
+    // print(_box.get(1));
+    // print(_box);
+
+    // final all = _box.toMap();
+    // print(all);
+
+    print(_box.get(1)?.name);
+    print(_box.get(1)?.age);
+    print(_box.get(1)?.occupation);
+    print(_box.get(1)?.email);
   }
 
   void ngewrite(){
-    _box.put(1, "sairul");
+    // _box.put(1, "sairul");
+    // _box.add("sairul");
+    final user = User(name: 'sairul', age: 21, occupation: 'student', email: "sairul@gmail.com");
+    _box.put(1, user);
   }
 
   void ngedelete(){
-    _box.delete(1);
+    // _box.delete(1);
+    _box.clear();
   }
 
   @override
