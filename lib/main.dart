@@ -50,8 +50,8 @@ class _HomeState extends State<Home> {
   }
 
   void ngedelete(){
-    // _box.delete(1);
-    _box.clear();
+    _box.delete(1);
+    // _box.clear();
   }
 
   @override
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text("Cancel", style: TextStyle(color: Colors.amber),),
+                            child: Text("Cancel", style: TextStyle(color: Colors.orange),),
                           ),
                           TextButton(
                             onPressed: () {
@@ -138,7 +138,7 @@ class _HomeState extends State<Home> {
                                   emailController.text);
                               Navigator.pop(context);
                             },
-                            child: Text("Save", style: TextStyle(color: Colors.amber),),
+                            child: Text("Save", style: TextStyle(color: Colors.orange),),
                           ),
                         ],
                       );
@@ -184,7 +184,7 @@ class _HomeState extends State<Home> {
                   final users = box.values.toList();
 
                   return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     child: Table(
                       border: TableBorder.all(),
                       defaultColumnWidth: const IntrinsicColumnWidth(),
