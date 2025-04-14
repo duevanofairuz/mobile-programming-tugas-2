@@ -50,8 +50,8 @@ class _HomeState extends State<Home> {
   }
 
   void ngedelete(){
-    _box.delete(1);
-    // _box.clear();
+    // _box.delete(1);
+    _box.clear();
   }
 
   @override
