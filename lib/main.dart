@@ -32,20 +32,21 @@ class _HomeState extends State<Home> {
     // print(_box.get(1));
     // print(_box);
 
-    // final all = _box.toMap();
-    // print(all);
+    final all = _box.toMap();
+    print(all);
 
-    print(_box.get(1)?.name);
-    print(_box.get(1)?.age);
-    print(_box.get(1)?.occupation);
-    print(_box.get(1)?.email);
+    print(_box.get(0)?.name);
+    print(_box.get(0)?.age);
+    print(_box.get(0)?.occupation);
+    print(_box.get(0)?.email);
   }
 
-  void ngewrite(){
+  void ngewrite(String name, int age, String occupation, String email){
     // _box.put(1, "sairul");
     // _box.add("sairul");
-    final user = User(name: 'sairul', age: 21, occupation: 'student', email: "sairul@gmail.com");
-    _box.put(1, user);
+    // final user = User(name: 'sairul', age: 21, occupation: 'student', email: "sairul@gmail.com");
+    final user = User(name: name, age: age, occupation: occupation, email: email);
+    _box.add(user);
   }
 
   void ngedelete(){
@@ -78,7 +79,72 @@ class _HomeState extends State<Home> {
                 )
             ),
             TextButton(
-                onPressed: ngewrite,
+                onPressed: () {
+                  // ngewrite('sairul', 21, 'student', 'sairul@gmail.com');
+                  final nameController = TextEditingController(text: "");
+                  final ageController = TextEditingController(text: "");
+                  final occupationController = TextEditingController(text: "");
+                  final emailController = TextEditingController(text: "");
+                  showDialog(
+                    context: context,
+                    builder: (context){
+                      return AlertDialog(
+                        content: Column(
+                          children: [
+                            TextField(
+                              controller: nameController,
+                              decoration: InputDecoration(
+                                labelText: "Name"
+                              ),
+                            ),
+                            SizedBox(height: 12,),
+                            TextField(
+                              controller: ageController,
+                              decoration: InputDecoration(
+                                labelText: "Age"
+                              ),
+                            ),
+                            SizedBox(height: 12,),
+                            TextField(
+                              controller: occupationController,
+                              decoration: InputDecoration(
+                                labelText: "Occupation"
+                              ),
+                            ),
+                            SizedBox(height: 12,),
+                            TextField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                labelText: "Email"
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Cancel", style: TextStyle(color: Colors.amber),),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              int age = int.parse(ageController.text);
+                              // onConfirm.call();
+                              ngewrite(
+                                  nameController.text,
+                                  age,
+                                  occupationController.text,
+                                  emailController.text);
+                              Navigator.pop(context);
+                            },
+                            child: Text("Save", style: TextStyle(color: Colors.amber),),
+                          ),
+                        ],
+                      );
+                    }
+                  );
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.blue,
                 ),
@@ -102,6 +168,28 @@ class _HomeState extends State<Home> {
                       color: Colors.white
                   ),
                 )
+            ),
+            SizedBox(height: 24,),
+            Table(
+              border: TableBorder.all(),
+              children: [
+                TableRow(
+                  children: [
+                    Text("Name"),
+                    Text("Age"),
+                    Text("Occupation"),
+                    Text("Email"),
+                  ]
+                ),
+                TableRow(
+                  children: [
+                    Text("sair"),
+                    Text("1"),
+                    Text("okupasi"),
+                    Text("Email@mail.com"),
+                  ]
+                )
+              ],
             ),
           ],
         ),
